@@ -1,0 +1,29 @@
+{
+  "name": "jobland",
+  "version": "1.0.0",
+  "description": "A platform for job seakers",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon --exec babel-node -- index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://Joyce_O@bitbucket.org/Joyce_O/jobland.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "homepage": "https://bitbucket.org/Joyce_O/jobland#readme",
+  "dependencies": {
+    "@babel/cli": "^7.7.4",
+    "@babel/core": "^7.7.4",
+    "@babel/node": "^7.7.4",
+    "@babel/preset-env": "^7.7.4",
+    "@babel/register": "^7.7.4",
+    "babel-core": "^6.26.3",
+    "cron": "^1.7.2",
+    "node-fetch": "^2.6.0",
+    "nodemon": "^2.0.1"
+  }
+}
