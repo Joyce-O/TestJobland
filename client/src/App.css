@@ -1,5 +1,6 @@
 .App {
-  text-align: center;
+  /* text-align: center; */
+  
 }
 
 .App-logo {
@@ -11,8 +12,8 @@
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
+  /* align-items: center; */
+  /* justify-content: center; */
   font-size: calc(10px + 2vmin);
   color: white;
 }
@@ -29,8 +30,30 @@
   width: 80%;
   margin: 0 auto;
   display: flex;
-  flex-direction: row;
-  justify-content: space-around;
+  /* flex-direction: row; */
+  justify-content: space-between;
   border: 2px solid rgb(236, 228, 228);
   border-radius: 50px 20px;
+}
+
+.job-hover {
+  cursor: pointer;
+}
+
+.job-company {
+  padding: 0 30px;
+}
+
+.job-dialog {
+  padding: 30px 50px;
+}
+
+.job-date {
+  padding-right: 10px;
+}
+
+.job-page-title {
+  /* width: 80%; */
+  padding: 30px 140px;
+  margin: 0 auto;
 }

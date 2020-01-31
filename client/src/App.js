@@ -1,19 +1,33 @@
-import React from 'react';
-import './App.css';
-import Jobs from './components/Jobs'
+import React from "react";
+import "./App.css";
+import Jobs from "./components/Jobs";
+const axios = require("axios");
 
+const JOB_API_URL = "http://localhost:3500/jobs";
 
-const Mockjobs = [
-{"id":"054e52ee-918c-4981-b45c-178fa0b9e827","type":"Full Time","url":"https://jobs.github.com/positions/054e52ee-918c-4981-b45c-178fa0b9e827","created_at":"Tue Nov 26 15:10:46 UTC 2019","company":"BentoBox","company_url":"http://www.getbento.com","location":"New York, NY","title":"Software Engineer","description":"\u003cp\u003eBentoBox empowers restaurants to own their presence, profits and relationships. The hospitality platform disrupts third-party services that come between the restaurant and the guest. BentoBox puts the restaurant first and offers tools that drive high-margin revenue directly through the restaurant’s website. BentoBox is trusted and loved by over 5,000 restaurants worldwide including The Meatball Shop, Joseph Leonard, Union Square Hospitality Group, Major Food Group, Rose’s Luxury, Eleven Madison Park \u0026amp; many more. Learn more at \u003ca href=\"http://www.getbento.com\"\u003ewww.getbento.com\u003c/a\u003e\u003c/p\u003e\n\u003cp\u003eWe’re looking for a mid-level Software Engineer to help build the world’s best digital operations platform for restaurants. Our current technology stack consists mostly of Django / Python and React, but we are always looking to use the tools that are most appropriate for the task at hand.\u003c/p\u003e\n\u003cp\u003eResponsibilities\u003c/p\u003e\n\u003cul\u003e\n\u003cli\u003eWork with designers, product managers, and other engineers to implement new features on our platform\u003c/li\u003e\n\u003cli\u003eContribute clean, clear, high-quality production code\u003c/li\u003e\n\u003cli\u003eHelp the product and design teamwork through the product specification, design, and feasibility process\u003c/li\u003e\n\u003cli\u003eContribute unit and integration tests for new and existing features\u003c/li\u003e\n\u003cli\u003eProvide effective and constructive feedback on other engineer’s contributions\u003c/li\u003e\n\u003cli\u003eResearch and recommend new technologies, help set best practices and coding standards\u003c/li\u003e\n\u003cli\u003eUphold BentoBox’s core mission, vision, and values\u003c/li\u003e\n\u003c/ul\u003e\n\u003cp\u003eSkills and Attributes\u003c/p\u003e\n\u003cul\u003e\n\u003cli\u003e2-5 years of experience writing production code\u003c/li\u003e\n\u003cli\u003eSome experience with writing code within the context of a web-based framework such as Django or Rails\u003c/li\u003e\n\u003cli\u003eA strong understanding of Javascript fundamentals\u003c/li\u003e\n\u003cli\u003eSome level of experience with React (with or without Redux)\u003c/li\u003e\n\u003c/ul\u003e\n\u003cp\u003eWhat We Offer\u003c/p\u003e\n\u003cul\u003e\n\u003cli\u003eCompetitive salary + equity \u003c/li\u003e\n\u003cli\u003eFull benefits (medical, dental, vision, 401(k), commuter benefits, life insurance)\u003c/li\u003e\n\u003cli\u003eFlexible vacation plan\u003c/li\u003e\n\u003cli\u003ePaid parental leave\u003c/li\u003e\n\u003cli\u003eProfessional development, growth, and support\u003c/li\u003e\n\u003cli\u003ePerks when dining with BentoBox customers such as tip reimbursement\u003c/li\u003e\n\u003cli\u003eStylish SoHo office with fresh snacks, seltzer, cold brew coffee, and a bar\u003c/li\u003e\n\u003cli\u003eDelicious catered lunches from BentoBox customers every Friday\u003c/li\u003e\n\u003cli\u003eMaking a positive impact on the hospitality community\u003c/li\u003e\n\u003c/ul\u003e\n\u003cp\u003ePlease share with us why you’re interested in this position. Include a link to your Github account, or any other public code samples you’d like to share with us.\u003c/p\u003e\n\u003cp\u003eHiring Process\u003c/p\u003e\n\u003cp\u003eCandidates for this position can expect the hiring process to follow the order below. \u003c/p\u003e\n\u003cul\u003e\n\u003cli\u003eQualified applicants will be invited to schedule a 30-minute screening call with our Recruiting team.\u003c/li\u003e\n\u003cli\u003eNext, they will have a 45-minute technical phone screen with our VP of Engineering.\u003c/li\u003e\n\u003cli\u003eCandidates who pass the exercise will be invited to our office to meet with our CTO, VP of Engineering, and Engineering Manager.\u003c/li\u003e\n\u003cli\u003eSuccessful candidates will be made an offer.\u003c/li\u003e\n\u003c/ul\u003e\n","how_to_apply":"\u003cp\u003ePlease apply via this link:\u003c/p\u003e\n\u003cp\u003e\u003ca href=\"https://grnh.se/26602b2d2\"\u003ehttps://grnh.se/26602b2d2\u003c/a\u003e\u003c/p\u003e\n","company_logo":"https://jobs.github.com/rails/active_storage/blobs/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBbVI0IiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--761b15286b7a5a9db5c64b268a134b722323c29a/bentobox-logo-320px.png"},
-]
+async function fetchJobs(updateCb) {  // Callback to update jobs
+  const res = await axios.get(
+    JOB_API_URL,
+    { crossdomain: true },);
+
+  updateCb(res.data); // Set the value of jobList to the current value
+}
+
 function App() {
+  // WE HAVE TO STORE IT HERE
+  const [jobList, updateJobs] = React.useState([]); // Initialize to an empty array
+  // The two destructured args, updateJobs(the second variable) is a function that we can use to update the state for joblist
+
+  React.useEffect(() => {
+    // This is react hook, it replaces some class components
+    fetchJobs(updateJobs);
+  }, []); // It takes in another argument -  the hooks you want to watch and update
   return (
     <div className="App">
-      <Jobs jobs={Mockjobs} /> 
+      <Jobs jobs={jobList} />
     </div>
   );
 }
-
 
 export default App;
 //WATCH HOW <Jobs jobs={}/> was declared showing it is has props named jobs could be any name, and it must containg something

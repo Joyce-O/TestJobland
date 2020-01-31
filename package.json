@@ -4,7 +4,7 @@
   "description": "A platform for job seakers",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon --exec babel-node -- index.js",
+    "start": "nodemon --exec babel-node -- api/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -22,8 +22,12 @@
     "@babel/preset-env": "^7.7.4",
     "@babel/register": "^7.7.4",
     "babel-core": "^6.26.3",
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
     "cron": "^1.7.2",
+    "express": "^4.17.1",
     "node-fetch": "^2.6.0",
-    "nodemon": "^2.0.1"
+    "nodemon": "^2.0.1",
+    "redis": "^2.8.0"
   }
 }
