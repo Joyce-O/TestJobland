@@ -44,8 +44,13 @@ app.put("/api/merchants/:stormId", async (req, res) => {
   console.log("req merchant terminla", req.body);
   return res.send(req.body);
 });
+app.put("/api/apps/:stormId", async (req, res) => {
+  console.log("req app", req.body);
+  return res.send(req.body);
+});
 
-app.get("/api/metrics/dashboardf", async (req, res) => {
+
+app.get("/api/metrics/dashboard", async (req, res) => {
   // const jobs = await getAsync('githubJobs');
   // console.log(JSON.parse(jobs).length);
   req = {
@@ -58,7 +63,7 @@ app.get("/api/metrics/dashboardf", async (req, res) => {
         email: "person@email.com",
         totalTopUp: 14633400,
         totalTransfers: 80000,
-        availableBalance: 30000
+        availableBalance: 3000
       },
       {
         businessName: "business2",
@@ -93,7 +98,7 @@ app.get("/api/metrics/dashboardf", async (req, res) => {
   return res.send(req);
 });
 
-app.get("/api/products", async (req, res) => {
+app.get("/api/products-metrics", async (req, res) => {
   // const jobs = await getAsync('githubJobs');
   // console.log(JSON.parse(jobs).length);
   req = [
@@ -180,7 +185,7 @@ app.get("/api/products", async (req, res) => {
   return res.send(req);
 });
 
-app.get("/api/categories", async (req, res) => {
+app.get("/api/products-categories", async (req, res) => {
   // const jobs = await getAsync('githubJobs');
   // console.log(JSON.parse(jobs).length);
   req = [
@@ -2023,14 +2028,14 @@ app.post("/api/transactionsh", async (req, res) => {
           updatedAt: "2020-01-30T08:54:06.000Z"
         }
       ]
-    },
+    }
   ];
   // console.log('req query', req.query);
 
   return res.send(data);
 });
 
-app.get("/api/transactions", async (req, res) => {
+app.get("/api/transactionsh", async (req, res) => {
   // const { email } = req.query;
   // const jobs = await getAsync('githubJobs');
   let data = [
@@ -2093,18 +2098,32 @@ app.get("/api/transactions", async (req, res) => {
 });
 
 app.post("/api/auth", async (req, res) => {
-  // console.log(req.body);
-  if (req.body.username == "obijoyce@gmail.com") {
+  console.log('req ', req);
+  if (req.body.username == "obijoyce@gmail.com" && req.headers.authorization) {
     return res.send({
       success: true,
-      token: "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdG9ybUlkIjoiYTZlOTBmYjUtNDZhYS0xMWVhLWIxOTYtNDQwMzJjODhiNGI4IiwidGVybWluYWxJZCI6IjIwNThHVzUzIiwiYnVzaW5lc3NOYW1lIjoiZGFwb0B3ZWJtYWxsbmcuY29tIiwiaXNNZXJjaGFudCI6dHJ1ZSwiaXNBZ2VudCI6dHJ1ZSwiaXNBZG1pbiI6dHJ1ZSwicm9sZXMiOlsiYWRtaW4iLCJhZ2VudCIsIm1lcmNoYW50Il0sImlhdCI6MTU4MTY4NjMyOSwiZXhwIjoxNTgxNzAwNzI5LCJpc3MiOiJzdG9ybTphY2NvdW50Iiwic3ViIjoiYXV0aCJ9.n1KrbuP_R-sBn2BZ7Li0mRrHeFYzzFAcbVkbjSVhm0A"
-         // "token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdG9ybUlkIjoiYTZlOTBmYjUtNDZhYS0xMWVhLWIxOTYtNDQwMzJjODhiNGI4IiwidGVybWluYWxJZCI6IjIwNThHVzUzIiwiYnVzaW5lc3NOYW1lIjoiZGFwb0B3ZWJtYWxsbmcuY29tIiwiaXNNZXJjaGFudCI6dHJ1ZSwiaXNBZ2VudCI6dHJ1ZSwiaXNBZG1pbiI6dHJ1ZSwiaWF0IjoxNTgwOTAyNjg5LCJleHAiOjE1ODA5MTcwODksImlzcyI6InN0b3JtOmFjY291bnQiLCJzdWIiOiJhdXRoIn0.v_XbBHcUIRFpFvsUPX7eq6obKRhm2n20lbdeUY_TtZE"
-    });
+      token: "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdG9ybUlkIjoiOTY4MzMwNmYtNTNmNy0xMWVhLWEyMTEtNDQwMzJjODhiNGI4IiwidGVybWluYWxJZCI6IjIwNThHVzUzIiwiYnVzaW5lc3NOYW1lIjoiZGFwb0B3ZWJtYWxsbmcuY29tIiwiaXNNZXJjaGFudCI6ZmFsc2UsImlzQWdlbnQiOmZhbHNlLCJpc0FkbWluIjp0cnVlLCJyb2xlcyI6WyJhZG1pbiJdLCJhcHBuYW1lIjoic3Rvcm1fYWRtaW4iLCJwZXJtaXNzaW9ucyI6WyJyb2xlOmFkbWluIl0sImlhdCI6MTU4MjM4NjQ3NiwiZXhwIjoxNTgyNDAwODc2LCJpc3MiOiJzdG9ybTphY2NvdW50cyIsInN1YiI6ImF1dGgifQ.jWa3IKDBdiLM-qgcCoANcmeH6tDs_UWNcGkpxmqwkpI"
+      });
   } else {
     return res.send({
       success: false
     });
   }
+});
+
+app.post("/api/token", async (req, res) => {
+  console.log(req.body);
+    return res.send({
+      success: true,
+      token: "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdG9ybUlkIjoiMTg2MThiNTQtZjAxZi00NTJkLTkzZDQtNmY4NmQ5ODZhZjU1IiwiYnVzaW5lc3NOYW1lIjoiTmV0cGx1c0RvdENvbSIsImlzTmV0cGx1c1NlcnZpY2UiOnRydWUsImlzRmluYW5jaWFsU2VydmljZSI6ZmFsc2UsImlzQ291cmllclNlcnZpY2UiOmZhbHNlLCJpc01lcmNoYW50U2VydmljZSI6ZmFsc2UsImFwcG5hbWUiOiJzdG9ybV9hZG1pbiIsInJvbGVzIjpbIm5ldHBsdXMtc2VydmljZSJdLCJwZXJtaXNzaW9ucyI6WyJyb2xlOm5ldHBsdXMtc2VydmljZSJdLCJpYXQiOjE1ODIyOTA4NDEsImV4cCI6MTU4MjMwNTI0MSwiaXNzIjoic3Rvcm06YWNjb3VudHMiLCJzdWIiOiJhdXRoIn0.ZiTIA0B-r55-tkVPfyiJoke29qNqMJ8SWMZnTOJbEVA"
+      });
+});
+
+app.post("/api/register-app", async (req, res) => {
+  console.log(req.body);
+    return res.send({
+      success: true,
+  });
 });
 
 app.get("/api/agents", async (req, res) => {
@@ -2570,6 +2589,135 @@ app.get("/api/merchants", async (req, res) => {
       bankAccountNumber: "",
       bvnNumber: "",
       activated: false
+    }
+  ];
+  // return res.send({"storm_id": "AAds-sdsds-dsdss"})
+  res.status(200).json(jobs);
+});
+
+app.get("/api/apps", async (req, res) => {
+  // const jobs = await getAsync('githubJobs');
+  // console.log(JSON.parse(jobs).length);
+  let jobs = [
+    {
+      stormId: "a6ea98be-46aa-11ea-b196-44032c88b4b8",
+      appname: "magic_app",
+      businessName: "name@email.com",
+      contactEmail: "name@email.com",
+      contactNumber: "08089319222",
+      bankName: "Zenith Bank International",
+      bankAccountNumber: "0982111908",
+      activated: true
+    },
+    {
+      stormId: "abea98be-46aa-11ea-b196-44032c88b4b8",
+      appname: "Lunar_app",
+      businessName: "name@email.com",
+      contactEmail: "name@email.com",
+      contactNumber: "08089319222",
+      bankName: "Zenith Bank International",
+      bankAccountNumber: "0982111908",
+      activated: false
+    },
+    {
+      stormId: "acea98be-46aa-11ea-b196-44032c88b4b8",
+      appname: "Planet_app",
+      businessName: "name@email.com",
+      contactEmail: "name@email.com",
+      contactNumber: "08089319222",
+      bankName: "Zenith Bank International",
+      bankAccountNumber: "0982111908",
+      activated: true
+    },
+    {
+      stormId: "adea98be-46aa-11ea-b196-44032c88b4b8",
+      appname: "Orbit_app",
+      businessName: "name@email.com",
+      contactEmail: "name@email.com",
+      contactNumber: "08089319222",
+      bankName: "Zenith Bank International",
+      bankAccountNumber: "0982111908",
+      activated: true
+    },
+    {
+      stormId: "aeea98be-46aa-11ea-b196-44032c88b4b8",
+      appname: "Uni_app",
+      businessName: "name@email.com",
+      contactEmail: "name@email.com",
+      contactNumber: "08089319222",
+      bankName: "Zenith Bank International",
+      bankAccountNumber: "0982111908",
+      activated: true
+    },
+    {
+      stormId: "afea98be-46aa-11ea-b196-44032c88b4b8",
+      appname: "Pluto_app",
+      businessName: "name@email.com",
+      contactEmail: "name@email.com",
+      contactNumber: "08089319222",
+      bankName: "Zenith Bank International",
+      bankAccountNumber: "0982111908",
+      activated: true
+    },
+    {
+      stormId: "agea98be-46aa-11ea-b196-44032c88b4b8",
+      appname: "Jupiter_app",
+      businessName: "name@email.com",
+      contactEmail: "name@email.com",
+      contactNumber: "08089319222",
+      bankName: "Zenith Bank International",
+      bankAccountNumber: "0982111908",
+      activated: true
+    },
+    {
+      stormId: "ahea98be-46aa-11ea-b196-44032c88b4b8",
+      appname: "Earth_app",
+      businessName: "name@email.com",
+      contactEmail: "name@email.com",
+      contactNumber: "08089319222",
+      bankName: "Zenith Bank International",
+      bankAccountNumber: "0982111908",
+      activated: true
+    },
+    {
+      stormId: "ajea98be-46aa-11ea-b196-44032c88b4b8",
+      appname: "Mars_app",
+      businessName: "name@email.com",
+      contactEmail: "name@email.com",
+      contactNumber: "08089319222",
+      bankName: "Zenith Bank International",
+      bankAccountNumber: "0982111908",
+      activated: true
+    },
+    {
+      stormId: "akea98be-46aa-11ea-b196-44032c88b4b8",
+      appname: "Venus_app",
+      businessName: "name@email.com",
+      contactEmail: "name@email.com",
+      contactNumber: "08089319222",
+      bankName: "Zenith Bank International",
+      bankAccountNumber: "0982111908",
+      activated: true
+    },
+    {
+      stormId: "apea98be-46aa-11ea-b196-44032c88b4b8",
+      appname: "Uranus_app",
+      businessName: "name@email.com",
+      contactEmail: "name@email.com",
+      contactNumber: "08089319222",
+      bankName: "Zenith Bank International",
+      bankAccountNumber: "0982111908",
+      activated: true
+    },
+    {
+      stormId: "amea98be-46aa-11ea-b196-44032c88b4b8",
+      appname: "Pluto_app",
+      businessName: "name@email.com",
+      contactEmail: "name@email.com",
+      contactNumber: "08089319222",
+      bankName: "Zenith Bank International",
+      bankAccountNumber: "0982111908",
+      activated: true
     }
   ];
   // return res.send({"storm_id": "AAds-sdsds-dsdss"})
